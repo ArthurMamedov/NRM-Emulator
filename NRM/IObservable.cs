@@ -1,6 +1,6 @@
 ﻿namespace NaturalRegistersMachineEmulator
 {
-    internal interface IObservable
+    internal interface IObservable //TODO: Do we need this file?
     {
     }
 }

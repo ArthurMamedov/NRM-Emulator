@@ -4,8 +4,7 @@ namespace NaturalRegistersMachineEmulator
 {
     internal abstract class Command
     {
-        //protected readonly int Number;
-        public int Number { get; private set; } //А мне надо только посмотреть номер команды!!! Почему я не могу это сделать???
+        public int Number { get; }
         protected readonly int[] Args;
         protected static Register register;
 
@@ -17,7 +16,7 @@ namespace NaturalRegistersMachineEmulator
         }
 
         public abstract int Execute();
-        public abstract string getName();
+        public abstract string getName(); //do we need this?
         public abstract override string ToString();
     }
 
@@ -65,9 +64,7 @@ namespace NaturalRegistersMachineEmulator
 
     internal class S : Command
     {
-        public S(int number, params int[] args) : base(number, args)
-        {
-        }
+        public S(int number, params int[] args) : base(number, args) { }
 
         public override int Execute()
         {
