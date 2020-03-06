@@ -1,0 +1,58 @@
+﻿<Window x:Class="NRM.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:NRM"
+    mc:Ignorable="d"
+    Title="Natural register machine emulator" Height="450" Width="800">
+
+    <DockPanel HorizontalAlignment="Center">
+        <StackPanel Width="240" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Add command" Grid.Column="0" Margin="20 0 10 0" Height="25" IsEnabled="False"/>
+                <TextBox Grid.Column="1" Margin="10 0 20 0" IsEnabled="False"/>
+            </Grid>
+            <Button Content="Delete command" Margin="20 15 20 0" Height="25" IsEnabled="False"/>
+            <Button Content="Clear" Margin="20 15 20 0" Height="25" Click="ClearListOfCommands"/>
+            <Button Content="Read from file" Margin="20 15 20 0" Height="25" Click="readFromFile"/>
+            <Button Content="Execute" Margin="20 15 20 0" Height="25" FontWeight="Bold" Click="Execute"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Next step" Margin="20 15 10 0" Height="25" IsEnabled="False"/>
+                <Button Grid.Column="1" Content="Prev step" Margin="10 15 20 0" Height="25" IsEnabled="False"/>
+            </Grid>
+            <CheckBox HorizontalAlignment="Center" Margin="0 10 0 0" Content="Start from 0" IsEnabled="False"/>
+            <TextBlock x:Name="OutFileName" Text="No file selected" Margin="20 5 20 0" TextWrapping="Wrap" Height="50"/>
+        </StackPanel>
+        <Grid>
+            <TextBlock Text="Commands" HorizontalAlignment="Center" FontWeight="Black" Margin="0 12 0 0"/>
+            <ListView x:Name="VisualList" Width="200" Margin="0 30 0 10">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="#" x:Name="NumberOfCommand" DisplayMemberBinding="{Binding Number}" Width="50"/>
+                        <GridViewColumn Header="Command" x:Name="CommandStr" Width="150"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid>
+            <TextBlock Text="Registers" HorizontalAlignment="Center" Margin="0 10 0 0" FontWeight="Black"/>
+            <ListView Width="120" Margin="20 30 10 10" x:Name="RegistList">
+                <ListView.View>
+                    <GridView>
+                        <!-- <GridViewColumn Header="#" Width="60"/> -->
+                        <GridViewColumn Header="Value" Width="60"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
+</Window>
