@@ -1,77 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NaturalRegistersMachineEmulator
 {
-    static class FileParser //TODO: You SURE it should be this long?
+    static class FileParser
     {
-        private const char COMMA = ',';
-        private const char LEFT = '(';
-        private const char RIGHT = ')';
-        private const char NOTHING = ' ';
-
-        private static List<char> DeleteCommand(string[] str)
+        public static CommandList ParseFile(string filePath)
         {
-            var temp = new List<char>();
-            for (var i = 0; i < str.Length; ++i)
-                if (str[i].Length > 0)
-                {
-                    temp.Add(str[i][0]);
-                    str[i] = str[i].Remove(0, 1);
-                }
+            if (!File.Exists(filePath)) //TODO: delete later?
+                throw new Exception("File not found");
 
-            return temp;
+            var input = File.ReadAllLines(filePath);
+            var commandList = CommandList.Instance;
+            commandList.Clear();
+
+            for (var i = 0; i < input.Length; ++i)
+                commandList.Add(ParseCommand(i, input[i]));
+            return commandList;
         }
 
-        private static List<int[]> DeleteParenthesis(string[] str) //renamed method to be normal English
+        public static Command ParseCommand(int number, string rawCommand)
         {
-            var array = new List<int[]>();
-            for (var i = 0; i < str.Length; i++)
+            rawCommand = (new Regex(@"\s+")).Replace(rawCommand, ""); //removing all whitespace characters
+            /* creating an array of arguments of a string, which potentially contains all needed information for command creation*/
+            string[] command = rawCommand.Split(',','(',')');
+
+            try
             {
-                str[i] = str[i].Replace(LEFT, NOTHING).Replace(RIGHT, NOTHING); //TODO: I feel like it can be made shorter
-                var temp = str[i].Split(COMMA);
-                var numbers = new int[temp.Length];
-                for (var j = 0; j < temp.Length; j++)
+                switch (command[0])
                 {
-                    numbers[j] = Convert.ToInt32(temp[j]);
-                }
-                array.Add(numbers);
-            }
-
-            return array;
-        }
-
-        public static CommandList FileParse(string FileName)
-        {
-            var str = File.ReadAllLines(FileName);
-            var symbols = DeleteCommand(str);
-            var arguments = DeleteParenthesis(str);
-            var commands = CommandList.Instance;
-
-            for (var i = 0; i < symbols.Count; ++i)
-            {
-                switch (symbols[i])
-                {
-                    case 'J':
-                        commands.Add(new J(i, arguments[i]));
-                        break;
-                    case 'T':
-                        commands.Add(new T(i, arguments[i]));
-                        break;
-                    case 'Z':
-                        commands.Add(new Z(i, arguments[i]));
-                        break;
-                    case 'S':
-                        commands.Add(new S(i, arguments[i]));
-                        break;
+                    case "J":
+                        return new J(number, int.Parse(command[1]), int.Parse(command[2]), int.Parse(command[3]));
+                    case "S":
+                        return new S(number, int.Parse(command[1]));
+                    case "T":
+                        return new T(number, int.Parse(command[1]), int.Parse(command[2]));
+                    case "Z":
+                        return new Z(number, int.Parse(command[1]));
                     default:
-                        throw new Exception("Syntax Error: Unknown Command."); //TODO: Exception handler
+                        throw new Exception();
                 }
             }
-
-            return commands;
+            catch
+            {
+                throw new Exception($"Syntax Error on line {number + 1}. Failed to read file.");
+            }
         }
     }
 }

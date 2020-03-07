@@ -1,6 +1,4 @@
-﻿using NaturalRegistersMachineEmulator;
-
-namespace NaturalRegistersMachineEmulator
+﻿namespace NaturalRegistersMachineEmulator
 {
     internal abstract class Command
     {
@@ -16,7 +14,6 @@ namespace NaturalRegistersMachineEmulator
         }
 
         public abstract int Execute();
-        public abstract string getName(); //do we need this?
         public abstract override string ToString();
     }
 
@@ -30,7 +27,6 @@ namespace NaturalRegistersMachineEmulator
             return Number + 1;
         }
 
-        public override string getName() => "J";
         public override string ToString() => $"J({Args[0]}, {Args[1]}, {Args[2]})";
     }
 
@@ -43,8 +39,6 @@ namespace NaturalRegistersMachineEmulator
             register[Args[1]] = register[Args[0]];
             return Number + 1;
         }
-
-        public override string getName() => "T";
         public override string ToString() => $"T({Args[0]}, {Args[1]})";
     }
 
@@ -58,7 +52,6 @@ namespace NaturalRegistersMachineEmulator
             return Number + 1;
         }
 
-        public override string getName() => "Z";
         public override string ToString() => $"Z({Args[0]})";
     }
 
@@ -72,7 +65,6 @@ namespace NaturalRegistersMachineEmulator
             return Number + 1;
         }
 
-        public override string getName() => "S";
         public override string ToString() => $"S({Args[0]})";
     }
 }

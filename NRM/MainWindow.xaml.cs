@@ -23,13 +23,13 @@ namespace NRM
     public partial class MainWindow : Window
     {
         private NaturalRegistersMachineEmulator.CommandList commandList { get; set; }
-        private NaturalRegistersMachineEmulator.Register register = NaturalRegistersMachineEmulator.Register.Instance;
+        private NaturalRegistersMachineEmulator.Register register = NaturalRegistersMachineEmulator.Register.Instance; //ReSharper says it can be readonly
         public MainWindow() => InitializeComponent();
 
 
         private void readFromFile(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            OpenFileDialog fileDialog = new OpenFileDialog(); //ReSharper says it can be simplified
             fileDialog.Multiselect = false;
             //fileDialog.Filter = "*.txt";//Don't uncomment it PLEASE! DON'T DO THIS IT WILL EAT YOU NOOOOOOOOOOOOOOOOOOOOOOOOOOOO
             fileDialog.DefaultExt = ".txt";
@@ -39,16 +39,13 @@ namespace NRM
                 try
                 {
                     VisualList.ItemsSource = null;
-                    commandList?.Clear();
-                    //VisualList.Items.Clear();
-                    //VisualList.Items.Refresh();
-                    commandList = NaturalRegistersMachineEmulator.FileParser.FileParse(fileDialog.FileName);
+                    commandList = NaturalRegistersMachineEmulator.FileParser.ParseFile(fileDialog.FileName);
                     OutFileName.Text = $"Current file: {fileDialog.FileName}";
                     VisualList.ItemsSource = commandList;
                 }
                 catch (System.FormatException ex)
                 {
-                    MessageBox.Show($"File has a syntax error\n{ex.Message}");
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
