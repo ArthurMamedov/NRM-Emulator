@@ -2,7 +2,7 @@
 {
     internal abstract class Command
     {
-        public int Number { get; }
+        public int Number { get; set; }
         protected readonly int[] Args;
         protected static Register register;
 

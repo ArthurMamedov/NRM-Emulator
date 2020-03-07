@@ -9,7 +9,7 @@ namespace NaturalRegistersMachineEmulator
         public static CommandList ParseFile(string filePath)
         {
             if (!File.Exists(filePath)) //TODO: delete later?
-                throw new Exception("File not found");
+                throw new Exception($"File \"{filePath}\" not found");
 
             var input = File.ReadAllLines(filePath);
             var commandList = CommandList.Instance;

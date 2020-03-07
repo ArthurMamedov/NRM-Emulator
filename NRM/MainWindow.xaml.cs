@@ -32,6 +32,7 @@ namespace NRM
             OpenFileDialog fileDialog = new OpenFileDialog(); //ReSharper says it can be simplified
             fileDialog.Multiselect = false;
             //fileDialog.Filter = "*.txt";//Don't uncomment it PLEASE! DON'T DO THIS IT WILL EAT YOU NOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+            //why though?
             fileDialog.DefaultExt = ".txt";
             Nullable<bool> dialogOk = fileDialog.ShowDialog();
             if (dialogOk.GetValueOrDefault())
