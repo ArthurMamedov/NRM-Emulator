@@ -14,6 +14,7 @@ namespace NaturalRegistersMachineEmulator
         private readonly List<Command> _commands;
         private int _current = 0;
         private int _steps = 0; //to check the step by step execution
+        public int Count => _commands.Count;
 
         private CommandList() => _commands = new List<Command>();
         public static CommandList Instance { get; } = _instance ??= new CommandList();

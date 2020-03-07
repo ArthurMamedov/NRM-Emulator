@@ -44,7 +44,8 @@ namespace NaturalRegistersMachineEmulator
             }
             catch
             {
-                throw new Exception($"Syntax Error on line {number + 1}. Failed to read file.");
+                throw new Exception($"Syntax Error: Failed to read command.");
+                //Sorry for this, but I had to...
             }
         }
     }

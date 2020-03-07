@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Microsoft.Win32;
+using NaturalRegistersMachineEmulator;
 
 namespace NRM
 {
@@ -25,16 +26,15 @@ namespace NRM
         private NaturalRegistersMachineEmulator.CommandList commandList { get; set; }
         private NaturalRegistersMachineEmulator.Register register = NaturalRegistersMachineEmulator.Register.Instance; //ReSharper says it can be readonly
         public MainWindow() => InitializeComponent();
-
-
         private void readFromFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog(); //ReSharper says it can be simplified
             fileDialog.Multiselect = false;
             //fileDialog.Filter = "*.txt";//Don't uncomment it PLEASE! DON'T DO THIS IT WILL EAT YOU NOOOOOOOOOOOOOOOOOOOOOOOOOOOO
             //why though?
+            //Because this ass hole's gonna make a lot a stupid shit! Isn't that obvious?
             fileDialog.DefaultExt = ".txt";
-            Nullable<bool> dialogOk = fileDialog.ShowDialog();
+            var dialogOk = fileDialog.ShowDialog();
             if (dialogOk.GetValueOrDefault())
             {
                 try
@@ -66,6 +66,43 @@ namespace NRM
             OutFileName.Text = "No file selected";
             VisualList.ItemsSource = null;
             RegistList.ItemsSource = null;
+        }
+
+        private void DeleteCommand(object sender, RoutedEventArgs e)
+        {
+            if (VisualList.SelectedItems.Count > 0)
+            {
+                var selectedIndex = VisualList.SelectedIndex;
+                VisualList.ItemsSource = null;
+                VisualList.Items.Clear();
+                commandList.RemoveAt(selectedIndex);
+                VisualList.ItemsSource = commandList;
+            }
+        }
+
+        private void AddCommand(object sender, RoutedEventArgs e)
+        {
+            if (EnterCommandBox.Text == "") return;
+            try
+            {
+                if(commandList is null)
+                {
+                    commandList = CommandList.Instance;
+                }
+                var command = FileParser.ParseCommand(commandList.Count, EnterCommandBox.Text);
+                VisualList.ItemsSource = null;
+                VisualList.Items.Clear();
+                commandList.Add(command);
+                VisualList.ItemsSource = commandList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                EnterCommandBox.Text = "";
+            }
         }
     }
 }
