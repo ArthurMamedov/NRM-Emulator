@@ -1,11 +1,13 @@
-﻿namespace NaturalRegistersMachineEmulator
+﻿using System;
+
+namespace NaturalRegistersMachineEmulator
 {
     internal abstract class Command
     {
         public int Number { get; set; }
         protected readonly int[] Args;
         protected static Register register;
-
+        
         protected Command(int number, params int[] args)
         {
             register = Register.Instance;
@@ -23,6 +25,7 @@
 
         public override int Execute()
         {
+            CommandList.Instance._reverse.Push(new EmptyReverse(Number));
             if (register[Args[0]] == register[Args[1]]) return Args[2];
             return Number + 1;
         }
@@ -36,6 +39,7 @@
 
         public override int Execute()
         {
+            CommandList.Instance._reverse.Push(new RestoreValue(Number, register[Args[1]], Args[1]));
             register[Args[1]] = register[Args[0]];
             return Number + 1;
         }
@@ -48,6 +52,7 @@
 
         public override int Execute()
         {
+            CommandList.Instance._reverse.Push(new RestoreValue(Number, register[Args[0]], Args[0]));
             register[Args[0]] = 0;
             return Number + 1;
         }
@@ -61,6 +66,7 @@
 
         public override int Execute()
         {
+            CommandList.Instance._reverse.Push(new RestoreValue(Number, register[Args[0]], Args[0]));
             ++register[Args[0]];
             return Number + 1;
         }

@@ -134,7 +134,7 @@ namespace NRM
             RegistList.ItemsSource = register;
             if(select >= commandList.Count)
             {
-                MessageBox.Show("Prorgram in finished!");
+                MessageBox.Show("Program is finished!");
             }
             VisualList.SelectedIndex = select == -1 ? 0 : select;
         }
