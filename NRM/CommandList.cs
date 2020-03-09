@@ -12,13 +12,11 @@ namespace NaturalRegistersMachineEmulator
         private static CommandList _instance;
         private const int MaxSteps = 1000;
         private readonly List<Command> _commands;
+        public readonly Stack<ReverseCommand> _reverse;
         private int _current = 0;
         public int Current
         {
-            get
-            {
-                return _current;
-            }
+            get => _current;
             set  // вообще, это надо только для функционирования кнопки Reset...  
             {
                 if (value >= 0)
@@ -28,7 +26,12 @@ namespace NaturalRegistersMachineEmulator
         private int _steps = 0; //to check the step by step execution
         public int Count => _commands.Count;
 
-        private CommandList() => _commands = new List<Command>();
+        private CommandList()
+        {
+            _commands = new List<Command>();
+            _reverse = new Stack<ReverseCommand>();
+        }
+
         public static CommandList Instance { get; } = _instance ??= new CommandList();
 
         public void Add(params Command[] commands) => _commands.AddRange(commands);
@@ -64,9 +67,12 @@ namespace NaturalRegistersMachineEmulator
         public void Execute()
         {
             for (_steps = 0; _current < _commands.Count && _steps <= MaxSteps; ++_steps)
-                _current = _commands[_current].Execute();
+            {
 
-            if (_steps >= MaxSteps)
+                _current = _commands[_current].Execute();
+            }
+
+        if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
                 throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop."); //TODO: добавить обработку этого
