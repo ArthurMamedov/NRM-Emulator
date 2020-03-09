@@ -19,7 +19,7 @@
             </Grid>
             <Button Content="Delete command" Margin="20 15 20 0" Height="25" Click="DeleteCommand"/>
             <Button Content="Clear" Margin="20 15 20 0" Height="25" Click="ClearListOfCommands"/>
-            <Button Content="Read from file" Margin="20 15 20 0" Height="25" Click="readFromFile"/>
+            <Button Content="Read from file" Margin="20 15 20 0" Height="25" Click="ReadFromFile"/>
             <Button Content="Set registers" Margin="20 15 20 0" Height="25" IsEnabled="False"/>
             <Button Content="Execute" Margin="20 15 20 0" Height="25" FontWeight="Bold" Click="Execute"/>
             <Grid>
@@ -30,7 +30,11 @@
                 <Button Grid.Column="0" Content="Next step" Margin="20 15 10 0" Height="25" IsEnabled="False"/>
                 <Button Grid.Column="1" Content="Prev step" Margin="10 15 20 0" Height="25" IsEnabled="False"/>
             </Grid>
-            <CheckBox HorizontalAlignment="Center" Margin="0 10 0 0" Content="Start from 0" IsEnabled="False"/>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="20 15 0 0" Content="Start from 0" IsEnabled="False"/>
+                <Button Content="🔺" Width="25" Height="25" Margin="45 15 0 10" Click="SwapUp"/>
+                <Button Content="🔻" Width="25" Height="25" Margin="20 15 0 10" Click="SwapDown"/>
+            </StackPanel>
             <TextBlock x:Name="OutFileName" Text="No file selected" Margin="20 5 20 0" TextWrapping="Wrap" Height="50"/>
         </StackPanel>
         <Grid>

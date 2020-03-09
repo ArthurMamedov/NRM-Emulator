@@ -1,18 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 using Microsoft.Win32;
 using NaturalRegistersMachineEmulator;
 
@@ -26,14 +13,14 @@ namespace NRM
         private NaturalRegistersMachineEmulator.CommandList commandList { get; set; }
         private NaturalRegistersMachineEmulator.Register register = NaturalRegistersMachineEmulator.Register.Instance; //ReSharper says it can be readonly
         public MainWindow() => InitializeComponent();
-        private void readFromFile(object sender, RoutedEventArgs e)
+        private void ReadFromFile(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog(); //ReSharper says it can be simplified
-            fileDialog.Multiselect = false;
-            //fileDialog.Filter = "*.txt";//Don't uncomment it PLEASE! DON'T DO THIS IT WILL EAT YOU NOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-            //why though?
-            //Because this ass hole's gonna make a lot a stupid shit! Isn't that obvious?
-            fileDialog.DefaultExt = ".txt";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Filter = "txt files (*.txt)|*.txt",
+                DefaultExt = ".txt"
+            }; //ReSharper says it can be simplified //I guess, that not only about ReSharper
             var dialogOk = fileDialog.ShowDialog();
             if (dialogOk.GetValueOrDefault())
             {
@@ -85,7 +72,7 @@ namespace NRM
             if (EnterCommandBox.Text == "") return;
             try
             {
-                if(commandList is null)
+                if (commandList is null)
                 {
                     commandList = CommandList.Instance;
                 }
@@ -103,6 +90,34 @@ namespace NRM
             {
                 EnterCommandBox.Text = "";
             }
+        }
+
+        private void SwapUp(object sender, RoutedEventArgs e)
+        {
+            if (VisualList.ItemsSource is null || VisualList.SelectedItems.Count == 0 || VisualList.SelectedIndex == 0)
+            {
+                return;
+            }
+            var selectedIndex = VisualList.SelectedIndex;
+            VisualList.ItemsSource = null;
+            VisualList.Items.Clear();
+            commandList.Swap(selectedIndex, selectedIndex - 1);
+            VisualList.ItemsSource = commandList;
+            VisualList.SelectedIndex = selectedIndex - 1;
+        }
+        
+        private void SwapDown(object sender, RoutedEventArgs e)
+        {
+            if(VisualList.ItemsSource is null || VisualList.SelectedItems.Count == 0 || VisualList.SelectedIndex == commandList.Count-1)
+            {
+                return;
+            }
+            var selectedIndex = VisualList.SelectedIndex;
+            VisualList.ItemsSource = null;
+            VisualList.Items.Clear();
+            commandList.Swap(selectedIndex, selectedIndex + 1);
+            VisualList.ItemsSource = commandList;
+            VisualList.SelectedIndex = selectedIndex + 1;
         }
     }
 }

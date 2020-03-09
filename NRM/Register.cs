@@ -18,7 +18,7 @@ namespace NaturalRegistersMachineEmulator
             get
             {
                 while (index >= _registers.Count) // TODO: точно хорошая идея в цикле добавлять по числу?
-                    _registers.Add(0);
+                    _registers.Add(0); //Ну это ж не питон! Но если есть лучше идея - делай?
                 return _registers[index];
             }
             set
@@ -30,7 +30,7 @@ namespace NaturalRegistersMachineEmulator
         }
 
         public void ConsolePrint() //renamed to represent actual purpose
-        {
+        {//And never use, moge?..
             foreach (var value in _registers) 
                 Console.Write(value + " ");
             Console.WriteLine();
