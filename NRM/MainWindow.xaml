@@ -11,31 +11,31 @@
         <StackPanel Width="240" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="135"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Add command" Grid.Column="0" Margin="20 0 10 0" Height="25" Click="AddCommand"/>
+                <Button Content="Add command ➕" Grid.Column="0" Margin="20 0 10 0" Height="25" Click="AddCommand"/>
                 <TextBox Grid.Column="1" Margin="10 0 20 0" x:Name="EnterCommandBox"/>
             </Grid>
-            <Button Content="Delete command" Margin="20 15 20 0" Height="25" Click="DeleteCommand"/>
-            <Button Content="Clear" Margin="20 15 20 0" Height="25" Click="ClearListOfCommands"/>
-            <Button Content="Read from file" Margin="20 15 20 0" Height="25" Click="ReadFromFile"/>
-            <Button Content="Set registers" Margin="20 15 20 0" Height="25" IsEnabled="False"/>
-            <Button Content="Execute" Margin="20 15 20 0" Height="25" FontWeight="Bold" Click="Execute"/>
+            <Button Content="Delete command ❌" Margin="20 15 20 0" Height="25" Click="DeleteCommand"/>
+            <Button Content="Clear 🧹" Margin="20 15 20 0" Height="25" Click="ClearListOfCommands"/>
+            <Button Content="Read from file 📄" Margin="20 15 20 0" Height="25" Click="ReadFromFile"/>
+            <Button Content="Set registers ✏" Margin="20 15 20 0" Height="25" IsEnabled="False"/>
+            <Button Content="Execute ✔" Margin="20 15 20 0" Height="25" FontWeight="Bold" Click="Execute"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Next step" Margin="20 15 10 0" Height="25" IsEnabled="False"/>
-                <Button Grid.Column="1" Content="Prev step" Margin="10 15 20 0" Height="25" IsEnabled="False"/>
+                <Button Content="Next step ▶" Margin="20 15 10 0" Height="25" Click="GoToNextStep"/>
+                <Button Grid.Column="1" Content="Reset ↺" Margin="10 15 20 0" Height="25" Click="Reset"/>
             </Grid>
-            <StackPanel Orientation="Horizontal">
-                <CheckBox VerticalAlignment="Center" Margin="20 15 0 0" Content="Start from 0" IsEnabled="False"/>
-                <Button Content="🔺" Width="25" Height="25" Margin="45 15 0 10" Click="SwapUp"/>
-                <Button Content="🔻" Width="25" Height="25" Margin="20 15 0 10" Click="SwapDown"/>
+            <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+                <CheckBox VerticalAlignment="Center" Margin="20 0 0 0" Content="Start from 0" IsEnabled="False"/>
+                <Button Content="🔺" Width="25" Height="25" Margin="45 0 0 0" Click="SwapUp"/>
+                <Button Content="🔻" Width="25" Height="25" Margin="20 0 0 0" Click="SwapDown"/>
             </StackPanel>
-            <TextBlock x:Name="OutFileName" Text="No file selected" Margin="20 5 20 0" TextWrapping="Wrap" Height="50"/>
+            <TextBlock x:Name="OutFileName" Text="No file selected" Margin="20 15 20 0" TextWrapping="Wrap" Height="50"/>
         </StackPanel>
         <Grid>
             <TextBlock Text="Commands" HorizontalAlignment="Center" FontWeight="Black" Margin="0 12 0 0"/>

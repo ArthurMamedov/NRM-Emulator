@@ -13,6 +13,18 @@ namespace NaturalRegistersMachineEmulator
         private const int MaxSteps = 1000;
         private readonly List<Command> _commands;
         private int _current = 0;
+        public int Current
+        {
+            get
+            {
+                return _current;
+            }
+            set  // вообще, это надо только для функционирования кнопки Reset...  
+            {
+                if (value >= 0)
+                    _current = value;
+            }
+        }
         private int _steps = 0; //to check the step by step execution
         public int Count => _commands.Count;
 
@@ -20,7 +32,7 @@ namespace NaturalRegistersMachineEmulator
         public static CommandList Instance { get; } = _instance ??= new CommandList();
 
         public void Add(params Command[] commands) => _commands.AddRange(commands);
-        
+
         public void Insert(int index, string rawCommand) //inserts command at index and changes numbers of other commands
         {
             var newCommand = FileParser.ParseCommand(index, rawCommand);
@@ -62,20 +74,28 @@ namespace NaturalRegistersMachineEmulator
             _current = 0; _steps = 0;
         }
 
-        public void ExecuteNext()
+        public int ExecuteNext()  //сорян за вмешательство в логику работы бэка, но тёмная сторона тёмной стороны зовёт...
         {
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
                 throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop."); //TODO: добавить обработку этого
             }
-
+            if (_current >= Count)
+            {
+                return Count;
+            }
             _current = _commands[_current].Execute();
             ++_steps;
+            return _current;
         }
 
         public IEnumerator GetEnumerator() => _commands.GetEnumerator();
 
-        public void Clear() => _commands.Clear();
+        public void Clear()
+        {
+            _current = 0;
+            _commands.Clear();
+        }
     }
 }

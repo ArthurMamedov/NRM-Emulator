@@ -48,11 +48,13 @@ namespace NRM
 
         private void ClearListOfCommands(object sender, RoutedEventArgs e)
         {
-            commandList?.Clear();
-            register?.Clear();
-            OutFileName.Text = "No file selected";
             VisualList.ItemsSource = null;
             RegistList.ItemsSource = null;
+            commandList?.Clear();
+            register?.Clear();
+            VisualList.ItemsSource = commandList;
+            RegistList.ItemsSource = register;
+            OutFileName.Text = "No file selected";
         }
 
         private void DeleteCommand(object sender, RoutedEventArgs e)
@@ -105,10 +107,10 @@ namespace NRM
             VisualList.ItemsSource = commandList;
             VisualList.SelectedIndex = selectedIndex - 1;
         }
-        
+
         private void SwapDown(object sender, RoutedEventArgs e)
         {
-            if(VisualList.ItemsSource is null || VisualList.SelectedItems.Count == 0 || VisualList.SelectedIndex == commandList.Count-1)
+            if (VisualList.ItemsSource is null || VisualList.SelectedItems.Count == 0 || VisualList.SelectedIndex == commandList.Count - 1)
             {
                 return;
             }
@@ -118,6 +120,31 @@ namespace NRM
             commandList.Swap(selectedIndex, selectedIndex + 1);
             VisualList.ItemsSource = commandList;
             VisualList.SelectedIndex = selectedIndex + 1;
+        }
+
+        private void GoToNextStep(object sender, RoutedEventArgs e)
+        {
+            if (commandList is null || commandList.Count == 0)
+            {
+                return;
+            }
+            RegistList.ItemsSource = null;
+            RegistList.Items.Clear();
+            var select = commandList.ExecuteNext();
+            RegistList.ItemsSource = register;
+            if(select >= commandList.Count)
+            {
+                MessageBox.Show("Prorgram in finished!");
+            }
+            VisualList.SelectedIndex = select == -1 ? 0 : select;
+        }
+
+        private void Reset(object sender, RoutedEventArgs e)
+        {
+            commandList.Current = 0;
+            RegistList.ItemsSource = null;
+            register.Clear();
+            RegistList.ItemsSource = register;
         }
     }
 }
