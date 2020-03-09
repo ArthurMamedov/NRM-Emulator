@@ -59,21 +59,32 @@ namespace NRM
 
         private void DeleteCommand(object sender, RoutedEventArgs e)
         {
-            if (VisualList.SelectedItems.Count > 0)
+            if (VisualList.SelectedItems.Count <= 0)
             {
-                var selectedIndex = VisualList.SelectedIndex;
-                VisualList.ItemsSource = null;
-                VisualList.Items.Clear();
-                commandList.RemoveAt(selectedIndex);
-                VisualList.ItemsSource = commandList;
+                return;
             }
+            var selectedIndex = VisualList.SelectedIndex;
+            VisualList.ItemsSource = null;
+            VisualList.Items.Clear();
+            commandList.RemoveAt(selectedIndex);
+            VisualList.ItemsSource = commandList;
+            if(VisualList.Items.Count > 0)
+            {
+                VisualList.SelectedIndex = selectedIndex >= VisualList.Items.Count? selectedIndex - 1 : selectedIndex;
+            }
+
         }
 
         private void AddCommand(object sender, RoutedEventArgs e)
         {
             if (EnterCommandBox.Text == "") return;
+            var selectedIndex = -1;
             try
             {
+                if (VisualList.SelectedItems.Count > 0)
+                {
+                    selectedIndex = VisualList.SelectedIndex;
+                }
                 if (commandList is null)
                 {
                     commandList = CommandList.Instance;
@@ -90,6 +101,8 @@ namespace NRM
             }
             finally
             {
+                if (selectedIndex != -1)
+                    VisualList.SelectedIndex = selectedIndex;
                 EnterCommandBox.Text = "";
             }
         }
@@ -132,7 +145,7 @@ namespace NRM
             RegistList.Items.Clear();
             var select = commandList.ExecuteNext();
             RegistList.ItemsSource = register;
-            if(select >= commandList.Count)
+            if (select >= commandList.Count)
             {
                 MessageBox.Show("Prorgram in finished!");
             }
@@ -141,10 +154,13 @@ namespace NRM
 
         private void Reset(object sender, RoutedEventArgs e)
         {
+            if (commandList is null || RegistList is null || register is null || VisualList is null)
+                return;
             commandList.Current = 0;
             RegistList.ItemsSource = null;
-            register.Clear();
+            register?.Clear();
             RegistList.ItemsSource = register;
+            VisualList.SelectedIndex = 0;
         }
     }
 }
