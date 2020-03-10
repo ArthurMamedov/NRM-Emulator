@@ -2,6 +2,7 @@
 using NaturalRegistersMachineEmulator;
 using System;
 using System.Windows;
+using System.Windows.Input;
 
 namespace NRM
 {
@@ -33,6 +34,14 @@ namespace NRM
                 {
                     MessageBox.Show(ex.Message);
                 }
+            }
+        }
+
+        private void EnterDetection(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                AddCommand(this, null);
             }
         }
 

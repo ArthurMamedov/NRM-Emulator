@@ -15,7 +15,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Content="Add command ➕" Grid.Column="0" Margin="20 0 10 0" Height="25" Click="AddCommand"/>
-                <TextBox Grid.Column="1" Margin="10 0 20 0" x:Name="EnterCommandBox"/>
+                <TextBox Grid.Column="1" Margin="10 0 20 0" x:Name="EnterCommandBox" KeyDown="EnterDetection"/>
             </Grid>
             <Button Content="Delete command ❌" Margin="20 15 20 0" Height="25" Click="DeleteCommand"/>
             <Button Content="Clear 🧹" Margin="20 15 20 0" Height="25" Click="ClearListOfCommands"/>
