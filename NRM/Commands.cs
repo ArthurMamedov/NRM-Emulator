@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace NaturalRegistersMachineEmulator
+﻿namespace NaturalRegistersMachineEmulator
 {
     internal abstract class Command
     {
         public int Number { get; set; }
         protected readonly int[] Args;
         protected static Register register;
-        
+
         protected Command(int number, params int[] args)
         {
             register = Register.Instance;

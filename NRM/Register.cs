@@ -7,9 +7,9 @@ namespace NaturalRegistersMachineEmulator
     public class Register : IEnumerable
     {
         private static Register _instance;
-        private readonly ObservableCollection<int> _registers; // why this type?
+        private readonly ObservableCollection<int> _registers; // why this type? //That's for ListView... C# is too stupid to understand that collection was changed, so that you shall either implement the INotifyPropertyChanged of use this Observable collection...
 
-        private Register() => _registers = new ObservableCollection<int>(){0,0,0,0,0};
+        private Register() => _registers = new ObservableCollection<int>() { 0, 0, 0, 0, 0 };
 
         public static Register Instance { get; } = _instance ??= new Register();
 
@@ -30,8 +30,8 @@ namespace NaturalRegistersMachineEmulator
         }
 
         public void ConsolePrint() //renamed to represent actual purpose
-        {//And never use, moge?..
-            foreach (var value in _registers) 
+        {//And never use, moge?.. //for debug purposes!
+            foreach (var value in _registers)
                 Console.Write(value + " ");
             Console.WriteLine();
         }

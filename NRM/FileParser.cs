@@ -15,8 +15,16 @@ namespace NaturalRegistersMachineEmulator
             var commandList = CommandList.Instance;
             commandList.Clear();
 
-            for (var i = 0; i < input.Length; ++i)
-                commandList.Add(ParseCommand(i, input[i]));
+            var i = 0;
+            try
+            {
+                for (; i < input.Length; ++i)
+                    commandList.Add(ParseCommand(i, input[i]));
+            }
+            catch
+            {
+                throw new Exception($"Syntax Error on line {i + 1}. Failed to read file.");
+            }
             return commandList;
         }
 
@@ -24,28 +32,24 @@ namespace NaturalRegistersMachineEmulator
         {
             rawCommand = (new Regex(@"\s+")).Replace(rawCommand, ""); //removing all whitespace characters
             /* creating an array of arguments of a string, which potentially contains all needed information for command creation*/
-            string[] command = rawCommand.Split(',','(',')');
+            var command = rawCommand.Split(',', '(', ')');
 
-            try
+            switch (command[0])
             {
-                switch (command[0])
-                {
-                    case "J":
-                        return new J(number, int.Parse(command[1]), int.Parse(command[2]), int.Parse(command[3]));
-                    case "S":
-                        return new S(number, int.Parse(command[1]));
-                    case "T":
-                        return new T(number, int.Parse(command[1]), int.Parse(command[2]));
-                    case "Z":
-                        return new Z(number, int.Parse(command[1]));
-                    default:
-                        throw new Exception();
-                }
-            }
-            catch
-            {
-                throw new Exception($"Syntax Error: Failed to read command.");
-                //Sorry for this, but I had to...
+                case "J":
+                case "j":
+                    return new J(number, int.Parse(command[1]), int.Parse(command[2]), int.Parse(command[3]));
+                case "S":
+                case "s":
+                    return new S(number, int.Parse(command[1]));
+                case "T":
+                case "t":
+                    return new T(number, int.Parse(command[1]), int.Parse(command[2]));
+                case "Z":
+                case "z":
+                    return new Z(number, int.Parse(command[1]));
+                default:
+                    throw new Exception($"Syntax Error: Failed to read command.");
             }
         }
     }

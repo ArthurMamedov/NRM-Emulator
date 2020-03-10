@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace NaturalRegistersMachineEmulator
+﻿namespace NaturalRegistersMachineEmulator
 {
     internal abstract class ReverseCommand
     {
         protected static readonly Register Reg = Register.Instance;
-        protected int Index { get; } //index of executed Command
+        public int Index { get; } //index of executed Command
 
         protected ReverseCommand(int index) => Index = index;
 
@@ -23,7 +21,7 @@ namespace NaturalRegistersMachineEmulator
             RegisterAddress = address;
         }
 
-        public override void Execute() => Reg[Index] = Value;
+        public override void Execute() => Reg[RegisterAddress] = Value;
     }
 
     internal class EmptyReverse : ReverseCommand

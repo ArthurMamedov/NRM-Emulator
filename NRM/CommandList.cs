@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
 
 namespace NaturalRegistersMachineEmulator
 {
@@ -66,13 +63,12 @@ namespace NaturalRegistersMachineEmulator
 
         public void Execute()
         {
+            _current = 0;
             for (_steps = 0; _current < _commands.Count && _steps <= MaxSteps; ++_steps)
             {
-
                 _current = _commands[_current].Execute();
             }
-
-        if (_steps >= MaxSteps)
+            if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
                 throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop."); //TODO: добавить обработку этого
@@ -94,6 +90,15 @@ namespace NaturalRegistersMachineEmulator
             _current = _commands[_current].Execute();
             ++_steps;
             return _current;
+        }
+
+        public int ExecutePrev()
+        {
+            if (_reverse.TryPop(out var RevCommand))
+                RevCommand.Execute();
+            else
+                throw new Exception("No commands to reverse.");
+            return (_current = RevCommand.Index);
         }
 
         public IEnumerator GetEnumerator() => _commands.GetEnumerator();

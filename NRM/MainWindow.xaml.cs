@@ -1,17 +1,14 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using NaturalRegistersMachineEmulator;
+using System;
+using System.Windows;
 
 namespace NRM
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private NaturalRegistersMachineEmulator.CommandList commandList { get; set; }
-        private NaturalRegistersMachineEmulator.Register register = NaturalRegistersMachineEmulator.Register.Instance; //ReSharper says it can be readonly
+        private CommandList commandList { get; set; }
+        private readonly Register register = Register.Instance;
         public MainWindow() => InitializeComponent();
         private void ReadFromFile(object sender, RoutedEventArgs e)
         {
@@ -20,18 +17,19 @@ namespace NRM
                 Multiselect = false,
                 Filter = "txt files (*.txt)|*.txt",
                 DefaultExt = ".txt"
-            }; //ReSharper says it can be simplified //I guess, that not only about ReSharper
+            };
             var dialogOk = fileDialog.ShowDialog();
             if (dialogOk.GetValueOrDefault())
             {
                 try
                 {
                     VisualList.ItemsSource = null;
-                    commandList = NaturalRegistersMachineEmulator.FileParser.ParseFile(fileDialog.FileName);
+                    commandList = FileParser.ParseFile(fileDialog.FileName); //не ловит нихера
                     OutFileName.Text = $"Current file: {fileDialog.FileName}";
                     VisualList.ItemsSource = commandList;
+                    VisualList.SelectedIndex = 0;
                 }
-                catch (System.FormatException ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -42,8 +40,19 @@ namespace NRM
         {
             RegistList.ItemsSource = null;
             register.Clear();
-            commandList?.Execute();
-            RegistList.ItemsSource = register;
+            try
+            {
+                commandList?.Execute();
+            }
+            catch(System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                RegistList.ItemsSource = register;
+                VisualList.SelectedIndex = 0;
+            }
         }
 
         private void ClearListOfCommands(object sender, RoutedEventArgs e)
@@ -68,9 +77,9 @@ namespace NRM
             VisualList.Items.Clear();
             commandList.RemoveAt(selectedIndex);
             VisualList.ItemsSource = commandList;
-            if(VisualList.Items.Count > 0)
+            if (VisualList.Items.Count > 0)
             {
-                VisualList.SelectedIndex = selectedIndex >= VisualList.Items.Count? selectedIndex - 1 : selectedIndex;
+                VisualList.SelectedIndex = selectedIndex >= VisualList.Items.Count ? selectedIndex - 1 : selectedIndex;
             }
 
         }
@@ -140,6 +149,10 @@ namespace NRM
             if (commandList is null || commandList.Count == 0)
             {
                 return;
+            }
+            if (commandList.Current == 0)
+            {
+                register.Clear();
             }
             RegistList.ItemsSource = null;
             RegistList.Items.Clear();
