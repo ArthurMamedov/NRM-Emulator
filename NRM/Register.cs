@@ -11,6 +11,7 @@ namespace NaturalRegistersMachineEmulator
 
         private Register() => _registers = new ObservableCollection<int>() { 0, 0, 0, 0, 0 };
 
+
         public static Register Instance { get; } = _instance ??= new Register();
 
         public int this[int index]
@@ -29,11 +30,18 @@ namespace NaturalRegistersMachineEmulator
             }
         }
 
-        public void ConsolePrint() //renamed to represent actual purpose
-        {//And never use, moge?.. //for debug purposes!
+        public void ConsolePrint()
+        {
             foreach (var value in _registers)
                 Console.Write(value + " ");
             Console.WriteLine();
+        }
+
+        public void SetStartValues(params int[] args)
+        {
+            for (int i = 0; i < args.Length; ++i)
+                if (args[i] >= 0) _registers[i] = args[i];
+                else throw new Exception("Invalid start values."); 
         }
 
         public void Clear() => _registers.Clear();

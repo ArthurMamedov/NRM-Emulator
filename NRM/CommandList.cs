@@ -10,7 +10,7 @@ namespace NaturalRegistersMachineEmulator
         private const int MaxSteps = 1000;
         private readonly List<Command> _commands;
         public readonly Stack<ReverseCommand> _reverse;
-        private int _current = 0;
+        private int _current = -1;
         public int Current
         {
             get => _current;
@@ -78,6 +78,7 @@ namespace NaturalRegistersMachineEmulator
 
         public int ExecuteNext()  //сорян за вмешательство в логику работы бэка, но тёмная сторона тёмной стороны зовёт...
         {
+            if (_current < 0) _current = 0;
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
@@ -97,7 +98,7 @@ namespace NaturalRegistersMachineEmulator
             if (_reverse.TryPop(out var RevCommand))
                 RevCommand.Execute();
             else
-                throw new Exception("No commands to reverse.");
+                return -1;
             return (_current = RevCommand.Index);
         }
 

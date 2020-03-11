@@ -15,20 +15,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Content="Add command ➕" Grid.Column="0" Margin="20 0 10 0" Height="25" Click="AddCommand"/>
-                <TextBox Grid.Column="1" Margin="10 0 20 0" x:Name="EnterCommandBox" KeyDown="EnterDetection"/>
+                <TextBox Grid.Column="1" TextAlignment="Justify" Margin="10 0 20 0" x:Name="EnterCommandBox" KeyDown="EnterDetection"/>
             </Grid>
             <Button Content="Delete command ❌" Margin="20 15 20 0" Height="25" Click="DeleteCommand"/>
             <Button Content="Clear 🧹" Margin="20 15 20 0" Height="25" Click="ClearListOfCommands"/>
             <Button Content="Read from file 📄" Margin="20 15 20 0" Height="25" Click="ReadFromFile"/>
-            <Button Content="Set registers ✏" Margin="20 15 20 0" Height="25" IsEnabled="False"/>
+            <Button Content="Set registers ✏" Margin="20 15 20 0" Height="25" Click="SetRegisters"/>
             <Button Content="Execute ✔" Margin="20 15 20 0" Height="25" FontWeight="Bold" Click="Execute"/>
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Next step ▶" Margin="20 15 10 0" Height="25" Click="GoToNextStep"/>
-                <Button Grid.Column="1" Content="Reset ↺" Margin="10 15 20 0" Height="25" Click="Reset"/>
+                <Button Content="Next step ▶" Grid.Column="1" Margin="10 15 20 0" Height="25" Click="GoToNextStep"/>
+                <Button Content="Prev step ◀" Margin="20 15 10 0" Height="25" Click="GoToPrevStep"/>
+                <Button Grid.Column="0" Grid.Row="1" Content="Reset ↺" Margin="20 15 10 0" Height="25" Click="Reset"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
                 <CheckBox VerticalAlignment="Center" Margin="20 0 0 0" Content="Start from 0" IsEnabled="False"/>

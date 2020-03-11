@@ -2,6 +2,7 @@
 using NaturalRegistersMachineEmulator;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace NRM
@@ -9,8 +10,16 @@ namespace NRM
     public partial class MainWindow : Window
     {
         private CommandList commandList { get; set; }
+
         private readonly Register register = Register.Instance;
+        private void Refresh(object sender, EventArgs e)
+        {
+            RegistList.ItemsSource = null;
+            RegistList.Items.Clear();
+            RegistList.ItemsSource = register;
+        }
         public MainWindow() => InitializeComponent();
+
         private void ReadFromFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog
@@ -25,7 +34,7 @@ namespace NRM
                 try
                 {
                     VisualList.ItemsSource = null;
-                    commandList = FileParser.ParseFile(fileDialog.FileName); //не ловит нихера
+                    commandList = FileParser.ParseFile(fileDialog.FileName);
                     OutFileName.Text = $"Current file: {fileDialog.FileName}";
                     VisualList.ItemsSource = commandList;
                     VisualList.SelectedIndex = 0;
@@ -48,7 +57,7 @@ namespace NRM
         private void Execute(object sender, RoutedEventArgs e)
         {
             RegistList.ItemsSource = null;
-            register.Clear();
+            //register.Clear();
             try
             {
                 commandList?.Execute();
@@ -159,7 +168,7 @@ namespace NRM
             {
                 return;
             }
-            if (commandList.Current == 0)
+            if (commandList.Current < 0)
             {
                 register.Clear();
             }
@@ -174,6 +183,21 @@ namespace NRM
             VisualList.SelectedIndex = select == -1 ? 0 : select;
         }
 
+        private void GoToPrevStep(object sender, RoutedEventArgs e)
+        {
+            if (commandList is null || commandList.Count == 0)
+                return;
+            if (commandList.Current == 0)
+                register.Clear();
+            RegistList.ItemsSource = null;
+            RegistList.Items.Clear();
+            var select = commandList.ExecutePrev();
+            RegistList.ItemsSource = register;
+            if (select < 0)
+                MessageBox.Show("No steps to reverse!");
+            VisualList.SelectedIndex = select == -1 ? 0 : select;
+        }
+
         private void Reset(object sender, RoutedEventArgs e)
         {
             if (commandList is null || RegistList is null || register is null || VisualList is null)
@@ -183,6 +207,19 @@ namespace NRM
             register?.Clear();
             RegistList.ItemsSource = register;
             VisualList.SelectedIndex = 0;
+        }
+
+        private void SetRegisters(object sender, RoutedEventArgs e)
+        ///<summary>
+        ///TODO: потом доделать отдельное поле для запоминания полученного состояния регистра, чтобы его можно было восстановить
+        ///TODO: допилить Execute и ExecuteNext так, чтобы регистр обнулялся до запомненного
+        ///TODO: норм протестить
+        ///Мне сейчас просто реально впадлу
+        ///</summary>
+        {
+            var regDial = new SetRegisterDialog();
+            regDial.Closed += Refresh;
+            regDial.Show(); 
         }
     }
 }
