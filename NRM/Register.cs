@@ -8,9 +8,9 @@ namespace NaturalRegistersMachineEmulator
     {
         private static Register _instance;
         private readonly ObservableCollection<int> _registers; // why this type? //That's for ListView... C# is too stupid to understand that collection was changed, so that you shall either implement the INotifyPropertyChanged of use this Observable collection...
+        public int[] ResetValues { get; set; }
 
         private Register() => _registers = new ObservableCollection<int>() { 0, 0, 0, 0, 0 };
-
 
         public static Register Instance { get; } = _instance ??= new Register();
 
@@ -37,14 +37,20 @@ namespace NaturalRegistersMachineEmulator
             Console.WriteLine();
         }
 
-        public void SetStartValues(params int[] args)
+        public void Reset()
         {
-            for (int i = 0; i < args.Length; ++i)
-                if (args[i] >= 0) _registers[i] = args[i];
-                else throw new Exception("Invalid start values."); 
+            if (ResetValues.Length == 0)
+                _registers.Clear();
+            else
+                for (var i = 0; i < ResetValues.Length; ++i)
+                    this[i] = ResetValues[i];
         }
 
-        public void Clear() => _registers.Clear();
+        public void Clear()
+        {
+            ResetValues = new int[0];
+            _registers.Clear();
+        }
 
         public IEnumerator GetEnumerator() => _registers.GetEnumerator();
     }

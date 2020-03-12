@@ -170,7 +170,7 @@ namespace NRM
             }
             if (commandList.Current < 0)
             {
-                register.Clear();
+                register.Reset();
             }
             RegistList.ItemsSource = null;
             RegistList.Items.Clear();
@@ -188,7 +188,7 @@ namespace NRM
             if (commandList is null || commandList.Count == 0)
                 return;
             if (commandList.Current == 0)
-                register.Clear();
+                register.Reset();
             RegistList.ItemsSource = null;
             RegistList.Items.Clear();
             var select = commandList.ExecutePrev();

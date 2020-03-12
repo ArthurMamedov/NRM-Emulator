@@ -22,14 +22,15 @@ namespace NRM
         public SetRegisterDialog() => InitializeComponent();
         public void SetRegister(object sender, RoutedEventArgs e)
         {
-            var rawRegister = StringRegister.Text;
-            var stillRawRegisterButNowItIsMuchBetter = rawRegister.Split(' ');
-            var auto = Register.Instance;
-            for (int c = 0; c < stillRawRegisterButNowItIsMuchBetter.Length; c++)
+            var rawRegister = StringRegister.Text.Split(' ');
+            var values = new int[rawRegister.Length];
+            for (var i = 0; i < rawRegister.Length; i++)
             {
-                int.TryParse(stillRawRegisterButNowItIsMuchBetter[c], out int tmp);
-                auto[c] = tmp;
+                uint.TryParse(rawRegister[i], out var tmp);
+                values[i] = Convert.ToInt32(tmp);
             }
+            Register.Instance.ResetValues = values;
+            Register.Instance.Reset();
             this.Close();
         }
     }
