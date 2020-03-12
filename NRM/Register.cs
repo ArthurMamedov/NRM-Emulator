@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 
-namespace NaturalRegistersMachineEmulator
+namespace NRM
 {
     public class Register : IEnumerable
     {

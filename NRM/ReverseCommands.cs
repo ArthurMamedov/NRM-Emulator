@@ -1,4 +1,4 @@
-﻿namespace NaturalRegistersMachineEmulator
+﻿namespace NRM
 {
     internal abstract class ReverseCommand
     {

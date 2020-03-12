@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using NaturalRegistersMachineEmulator;
+using NRM;
 using System;
 using System.Windows;
 using System.Windows.Controls;

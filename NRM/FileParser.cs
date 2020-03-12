@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace NaturalRegistersMachineEmulator
+namespace NRM
 {
     static class FileParser
     {
