@@ -165,13 +165,9 @@ namespace NRM
         private void GoToNextStep(object sender, RoutedEventArgs e)
         {
             if (commandList is null || commandList.Count == 0)
-            {
                 return;
-            }
             if (commandList.Current < 0)
-            {
                 register.Reset();
-            }
             RegistList.ItemsSource = null;
             RegistList.Items.Clear();
             var select = commandList.ExecuteNext();
@@ -187,7 +183,7 @@ namespace NRM
         {
             if (commandList is null || commandList.Count == 0)
                 return;
-            if (commandList.Current == 0)
+            if (commandList.Current < 0)
                 register.Reset();
             RegistList.ItemsSource = null;
             RegistList.Items.Clear();

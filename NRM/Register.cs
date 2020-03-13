@@ -10,7 +10,11 @@ namespace NRM
         private readonly ObservableCollection<int> _registers; // why this type? //That's for ListView... C# is too stupid to understand that collection was changed, so that you shall either implement the INotifyPropertyChanged of use this Observable collection...
         public int[] ResetValues { get; set; }
 
-        private Register() => _registers = new ObservableCollection<int>() { 0, 0, 0, 0, 0 };
+        private Register()
+        {
+            _registers = new ObservableCollection<int>() {0, 0, 0, 0, 0};
+            ResetValues = new int[0];
+        }
 
         public static Register Instance { get; } = _instance ??= new Register();
 
@@ -39,11 +43,9 @@ namespace NRM
 
         public void Reset()
         {
-            if (ResetValues.Length == 0)
-                _registers.Clear();
-            else
-                for (var i = 0; i < ResetValues.Length; ++i)
-                    this[i] = ResetValues[i];
+            _registers.Clear();
+            for (var i = 0; i < ResetValues.Length; ++i)
+                this[i] = ResetValues[i];
         }
 
         public void Clear()
