@@ -38,16 +38,16 @@ namespace NRM
             {
                 case "J":
                 case "j":
-                    return new J(number, int.Parse(command[1]), int.Parse(command[2]), int.Parse(command[3]));
+                    return new J(number + 1, int.Parse(command[1]), int.Parse(command[2]), int.Parse(command[3]));
                 case "S":
                 case "s":
-                    return new S(number, int.Parse(command[1]));
+                    return new S(number + 1, int.Parse(command[1]));
                 case "T":
                 case "t":
-                    return new T(number, int.Parse(command[1]), int.Parse(command[2]));
+                    return new T(number + 1, int.Parse(command[1]), int.Parse(command[2]));
                 case "Z":
                 case "z":
-                    return new Z(number, int.Parse(command[1]));
+                    return new Z(number + 1, int.Parse(command[1]));
                 default:
                     throw new Exception($"Syntax Error: Failed to read command.");
             }
