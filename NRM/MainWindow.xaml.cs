@@ -1,9 +1,8 @@
 ﻿using Microsoft.Win32;
-using NRM;
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace NRM
 {
@@ -36,6 +35,8 @@ namespace NRM
 					VisualList.ItemsSource = null;
 					commandList = FileParser.ParseFile(fileDialog.FileName);
 					OutFileName.Text = $"Current file: {fileDialog.FileName}";
+					OutFileName.Foreground = new SolidColorBrush(new Color() { A = 255, G = 230 });
+					OutFileName.FontWeight = FontWeights.Normal;
 					VisualList.ItemsSource = commandList;
 					VisualList.SelectedIndex = 0;
 				}
@@ -82,6 +83,8 @@ namespace NRM
 			VisualList.ItemsSource = commandList;
 			RegistList.ItemsSource = register;
 			OutFileName.Text = "No file selected";
+			OutFileName.FontWeight = FontWeights.Black;
+			OutFileName.Foreground = new SolidColorBrush(new Color() { A=255, R=255});
 		}
 
 		private void DeleteCommand(object sender, RoutedEventArgs e)
@@ -206,12 +209,6 @@ namespace NRM
 		}
 
 		private void SetRegisters(object sender, RoutedEventArgs e)
-		///<summary>
-		///TODO: потом доделать отдельное поле для запоминания полученного состояния регистра, чтобы его можно было восстановить
-		///TODO: допилить Execute и ExecuteNext так, чтобы регистр обнулялся до запомненного
-		///TODO: норм протестить
-		///Мне сейчас просто реально впадлу
-		///</summary>
 		{
 			var regDial = new SetRegisterDialog();
 			regDial.Closed += Refresh;

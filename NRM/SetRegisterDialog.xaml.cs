@@ -13,10 +13,7 @@ using System.Windows.Shapes;
 using NRM;
 
 namespace NRM
-{
-    /// <summary>
-    /// Interaction logic for SetRegisterDialog.xaml
-    /// </summary>
+{ 
     public partial class SetRegisterDialog : Window
     {
         public SetRegisterDialog() => InitializeComponent();
