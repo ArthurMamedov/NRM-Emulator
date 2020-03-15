@@ -10,17 +10,18 @@ namespace NRM
         private const int MaxSteps = 1000;
         private readonly List<Command> _commands;
         public readonly Stack<ReverseCommand> _reverse;
-        private int _current = -1;
+        private int _current;
         public int Current
         {
             get => _current;
-            set  // вообще, это надо только для функционирования кнопки Reset...  
+            set
             {
                 if (value >= 0)
                     _current = value;
             }
         }
-        private int _steps = 0; //to check the step by step execution
+
+        private int _steps;
         public int Count => _commands.Count;
 
         private CommandList()
@@ -64,25 +65,25 @@ namespace NRM
         public void Execute()
         {
             _reverse.Clear();
-            _current = 0;
-            for (_steps = 0; _current < _commands.Count && _steps <= MaxSteps; ++_steps)
-                _current = _commands[_current].Execute();
+            _current = 1;
+            for (_steps = 0; _current <= _commands.Count && _steps <= MaxSteps; ++_steps)
+                _current = _commands[_current - 1].Execute();
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
-                throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop."); //TODO: добавить обработку этого
+                throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop.");
             }
             _current = 0; _steps = 0;
         }
 
-        public int ExecuteNext()  //сорян за вмешательство в логику работы бэка, но тёмная сторона тёмной стороны зовёт...
+        public int ExecuteNext()
         {
-            if (_current < 0)
-                _current = 0;
+            if (_current < 1)
+                _current = 1;
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
-                throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop."); //TODO: добавить обработку этого
+                throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop.");
             }
             if (_current >= Count)
                 return Count;
@@ -96,7 +97,7 @@ namespace NRM
             if (_reverse.TryPop(out var RevCommand))
                 RevCommand.Execute();
             else
-                return -1;
+                return 0;
             return (_current = RevCommand.Index);
         }
 
@@ -104,7 +105,7 @@ namespace NRM
 
         public void Clear()
         {
-            _current = -1;
+            _current = 0;
             _commands.Clear();
         }
     }
