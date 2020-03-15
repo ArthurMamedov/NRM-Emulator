@@ -22,8 +22,8 @@ namespace NRM
         {
             get
             {
-                while (index >= _registers.Count) // TODO: точно хорошая идея в цикле добавлять по числу?
-                    _registers.Add(0); //Ну это ж не питон! Но если есть лучше идея - делай?
+                while (index >= _registers.Count)
+                    _registers.Add(0);
                 return _registers[index];
             }
             set

@@ -138,11 +138,9 @@ namespace NRM
 		}
 
 		private void SwapUp(object sender, RoutedEventArgs e)
-		{
-			if (VisualList.ItemsSource is null || VisualList.SelectedItems.Count == 0 || VisualList.SelectedIndex == 0)
-			{
-				return;
-			}
+        {
+            if (VisualList.ItemsSource is null || VisualList.SelectedItems.Count == 0 || VisualList.SelectedIndex == 0)
+                return;
 			var selectedIndex = VisualList.SelectedIndex;
 			VisualList.ItemsSource = null;
 			VisualList.Items.Clear();
@@ -154,9 +152,7 @@ namespace NRM
 		private void SwapDown(object sender, RoutedEventArgs e)
 		{
 			if (VisualList.ItemsSource is null || VisualList.SelectedItems.Count == 0 || VisualList.SelectedIndex == commandList.Count - 1)
-			{
 				return;
-			}
 			var selectedIndex = VisualList.SelectedIndex;
 			VisualList.ItemsSource = null;
 			VisualList.Items.Clear();
@@ -169,7 +165,7 @@ namespace NRM
 		{
 			if (commandList is null || commandList.Count == 0)
 				return;
-			if (commandList.Current < 0)
+			if (commandList.Current < 1)
 				register.Reset();
 			RegistList.ItemsSource = null;
 			RegistList.Items.Clear();
@@ -186,7 +182,7 @@ namespace NRM
 		{
 			if (commandList is null || commandList.Count == 0)
 				return;
-			if (commandList.Current < 0)
+			if (commandList.Current < 1)
 				register.Reset();
 			RegistList.ItemsSource = null;
 			RegistList.Items.Clear();
