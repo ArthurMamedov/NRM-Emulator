@@ -5,7 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:NRM"
 	mc:Ignorable="d"
-	Title="Natural register machine emulator" MinHeight="500" MinWidth="600" Height="520" Width="660" d:DesignWidth="600" d:DesignHeight="500">
+	Title="Natural register machine emulator" MinHeight="550" MinWidth="630" Height="550" Width="630" d:DesignWidth="600" d:DesignHeight="500">
 	<!--Main window markup-->
 	<Grid HorizontalAlignment="Stretch">
 		<!--Column diffinitions-->
@@ -20,7 +20,7 @@
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
+				<RowDefinition Height="1.3*"/>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
@@ -40,8 +40,35 @@
 			
 			<Button Grid.Row="1" Content="Delete command ❌"	Margin="10 15 10 0" MinHeight="25" Click="DeleteCommand"/>
 			<Button Grid.Row="2" Content="Clear 🧹"				Margin="10 15 10 0" MinHeight="25" Click="ClearListOfCommands"/>
-			<Button Grid.Row="3" Content="Read from file 📄"	Margin="10 15 10 0" MinHeight="25" Click="ReadFromFile"/>
-			<Button Grid.Row="4" Content="Set registers ✏"		Margin="10 15 10 0" MinHeight="25" Click="SetRegisters"/>
+            
+            <Grid Grid.Row="3" Margin="0 10 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Read/Write commands to a file:" Margin="0 0 0 2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Margin="10 0 7.5 0" Content="Read 📄" MinHeight="25" Click="ReadFromFile"/>
+                    <Button Grid.Column="1" Content="Write 📝" MinHeight="25" Margin="7.5 0 10 0" Click="WriteToFile"/>
+                </Grid>
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="10 15 7.5 0" MinHeight="25" Click="ReadFromFile">
+                    <TextBlock Text="Read commands from a file 📄" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <Button Grid.Column="1" Margin="7.5 15 10 0">
+                    <TextBlock Text="Save commands to a file 📝" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>-->
+                
+            </Grid>
+			
+            <Button Grid.Row="4" Content="Set registers ✏"		Margin="10 15 10 0" MinHeight="25" Click="SetRegisters"/>
             <Button Grid.Row="5" Content="Execute ✔"			Margin="10 15 10 0" MinHeight="25" Click="Execute" FontWeight="Bold"/>
 			
 			<Grid Grid.Row="6" Margin="10 15 10 0" HorizontalAlignment="Stretch">

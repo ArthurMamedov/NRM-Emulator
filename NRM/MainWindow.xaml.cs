@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.IO;
 
 namespace NRM
 {
@@ -44,6 +45,34 @@ namespace NRM
 				{
 					MessageBox.Show(ex.Message);
 				}
+			}
+		}
+		private void WriteToFile(object sender, RoutedEventArgs e)
+		{
+			if (commandList.Count == 0) 
+				return;
+			OpenFileDialog fileDialog = new OpenFileDialog
+			{
+				Multiselect = false,
+				Filter = "txt files (*.txt)|*.txt",
+				DefaultExt = ".txt"
+			};
+			var dialogOk = fileDialog.ShowDialog();
+			if (dialogOk == false) 
+				return;
+			try
+			{
+				using (StreamWriter streamWriter = new StreamWriter(fileDialog.FileName))
+				{
+					foreach(var command in commandList)
+					{
+						streamWriter.WriteLine(command);
+					}
+				}
+			}
+			catch
+			{
+				MessageBox.Show("Something went wrong");
 			}
 		}
 
