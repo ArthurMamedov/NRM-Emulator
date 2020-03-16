@@ -89,7 +89,7 @@ namespace NRM
                 return Count;
             _current = _commands[_current - 1].Execute();
             ++_steps;
-            return _current;
+            return _current - 1;
         }
 
         public int ExecutePrev()
