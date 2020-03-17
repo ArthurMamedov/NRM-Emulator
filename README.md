@@ -5,6 +5,7 @@ Natural register machine emulator
 Авторы:
 GUI:	ArthurMamedov
 Logic:	AlexValder, Chupakabra0
+Testing: Chupakabra0
 
 Проект Visual Studio находится на GitHub по адресу: https://github.com/ArthurMamedov/NRM-Emulator
 
@@ -14,6 +15,8 @@ Logic:	AlexValder, Chupakabra0
 на диск. Можно выполнять пошагово (Execute Next), отменять действия (Prev Step) и просто
 выполнять программу (Execute). Программа рассчитана на выполнение 1000 шагов, в случае же,
 если мы переходим через эту границу, машина останавливает свою работу.
+
+Команды можно добавлять по нажатию Enter и удалять по нажатию Delete.
 
 Программы для данного эмулятора МНР сохраняются в обычном текстовом файле формата *.txt
 
