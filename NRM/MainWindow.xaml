@@ -31,55 +31,154 @@
 
 			<Grid Grid.Row="0">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition MinWidth="135"/>
+					<ColumnDefinition MinWidth="135" Width="2*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<Button Content="Add command ➕" Grid.Column="0"	Margin="10 15 10 0" MinHeight="25" Click="AddCommand"/>
-				<TextBox Grid.Column="1" TextAlignment="Justify"	Margin="0 15 10 0" x:Name="EnterCommandBox" KeyDown="EnterDetection"/>
-			</Grid>
-			
-			<Button Grid.Row="1" Content="Delete command ❌"	Margin="10 15 10 0" MinHeight="25" Click="DeleteCommand"/>
-			<Button Grid.Row="2" Content="Clear 🧹"				Margin="10 15 10 0" MinHeight="25" Click="ClearListOfCommands"/>
+                <Button Grid.Column="0" Margin="10 15 10 0" MinHeight="25" Click="AddCommand">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox Margin="4">
+                                <TextBlock >Add command ➕</TextBlock>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <TextBox Grid.Column="1" TextAlignment="Justify"	Margin="0 15 10 0" x:Name="EnterCommandBox" KeyDown="EnterDetection"/>
+            </Grid>
+
+            <Button Grid.Row="1" Margin="10 15 10 0" MinHeight="25" Click="DeleteCommand">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox Margin="4">
+                            <TextBlock>Delete command ❌</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button Grid.Row="2" Margin="10 15 10 0" MinHeight="25" Click="ClearListOfCommands">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox Margin="4">
+                            <TextBlock>Clear 🧹</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
             
             <Grid Grid.Row="3" Margin="0 10 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Read/Write commands to a file:" Margin="0 0 0 2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                <Viewbox>
+                    <TextBlock Text="Read/Write commands to a file:" Margin="0 0 0 2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                </Viewbox>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Margin="10 0 7.5 0" Content="Load 📄" MinHeight="25" Click="ReadFromFile"/>
-                    <Button Grid.Column="1" Content="Save 📝" MinHeight="25" Margin="7.5 0 10 0" Click="WriteToFile"/>
+                    <Button Margin="10 0 7.5 0" MinHeight="25" Click="ReadFromFile">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <Viewbox Margin="4">
+                                    <TextBlock>Load 📄</TextBlock>
+                                </Viewbox>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
+                    <Button Grid.Column="1" MinHeight="25" Margin="7.5 0 10 0" Click="WriteToFile">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <Viewbox Margin="4">
+                                    <TextBlock>Save 📝</TextBlock>
+                                </Viewbox>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
                 </Grid>
             </Grid>
-			
-            <Button Grid.Row="4" Content="Set registers ✏"		Margin="10 15 10 0" MinHeight="25" Click="SetRegisters"/>
-            <Button Grid.Row="5" Content="Execute ✔"			Margin="10 15 10 0" MinHeight="25" Click="Execute" FontWeight="Bold"/>
+
+            <Button Grid.Row="4" Margin="10 15 10 0" MinHeight="25" Click="SetRegisters">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox Margin="4">
+                            <TextBlock>Set registers ✏</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button Grid.Row="5" Margin="10 15 10 0" MinHeight="25" Click="Execute" FontWeight="Bold">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox Margin="4">
+                            <TextBlock>Execute ✔</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
 			
 			<Grid Grid.Row="6" Margin="10 15 10 0" HorizontalAlignment="Stretch">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<Button Grid.Column="0" Content="Prev step ◀" MinWidth="75" Margin="0 0 7.5 0" MinHeight="25" Click="GoToPrevStep"/>
-				<Button Grid.Column="1" Content="Next step ▶" MinWidth="75" Margin="7.5 0 0 0" MinHeight="25" Click="GoToNextStep"/>
+                <Button Grid.Column="0" MinWidth="75" Margin="0 0 7.5 0" MinHeight="25" Click="GoToPrevStep">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox Margin="4">
+                                <TextBlock>Prev step ◀</TextBlock>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <Button Grid.Column="1" MinWidth="75" Margin="7.5 0 0 0" MinHeight="25" Click="GoToNextStep">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox Margin="4">
+                                <TextBlock>Next step ▶</TextBlock>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
 			</Grid>
-			
-			<Button Grid.Row="7" Content="Reset ↺" Margin="10 15 10 0" MinHeight="25" Click="Reset"/>
+
+            <Button Grid.Row="7" Margin="10 15 10 0" MinHeight="25" Click="Reset">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox Margin="3">
+                            <TextBlock>Reset ↺</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
 			<Grid Grid.Row="8" Margin="10 15 10 0" HorizontalAlignment="Stretch">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="3*"/>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-                <TextBlock Text="Move commands: " VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Black" FontSize="12"/>
-                <!--<CheckBox Grid.Column="0" VerticalAlignment="Center" Margin="0 0 0 0" Content="Start from 0" IsEnabled="False"/>-->
-				<Button Grid.Column="1" Content="🔺" MinWidth="25" MinHeight="25" Margin="0 0 7 0" Click="SwapUp"/>
-				<Button Grid.Column="2" Content="🔻" MinWidth="25" MinHeight="25" Margin="7 0 0 0" Click="SwapDown"/>
+                <Viewbox>
+                    <TextBlock Text="Move commands: " VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Black" FontSize="12"/>
+                </Viewbox>
+                <Button Grid.Column="1" MinWidth="25" MinHeight="25" Margin="0 0 7 0" Click="SwapUp">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox Margin="4">
+                                <TextBlock>🔺</TextBlock>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <Button Grid.Column="2" MinWidth="25" MinHeight="25" Margin="7 0 0 0" Click="SwapDown">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox Margin="4">
+                                <TextBlock>🔻</TextBlock>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
 			</Grid>
             <Border BorderThickness="1" Margin="10 15 10 10" BorderBrush="Black" Grid.Row="9">
                 <ScrollViewer>
@@ -89,9 +188,15 @@
         </Grid>
 		<!--List of commands-->
 		<Grid Grid.Column="1">
-			<TextBlock Text="Commands" HorizontalAlignment="Center" FontWeight="Black" Margin="0 12 0 0"/>
-			<ListView x:Name="VisualList" Margin="10 30 10 10" KeyDown="ListKeyDown">
-				<ListView.View>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Viewbox>
+                <TextBlock Text="Commands" HorizontalAlignment="Center" FontWeight="Black" Margin="0 5 0 0"/>
+            </Viewbox>
+            <ListView Grid.Row="1" x:Name="VisualList" Margin="10 0 10 10" KeyDown="ListKeyDown">
+                <ListView.View>
 					<GridView>
                         <GridViewColumn Header="#"			x:Name="NumberOfCommand"	Width="50" DisplayMemberBinding="{Binding Number}"/>
 						<GridViewColumn Header="Command"	x:Name="CommandStr"			Width="150"/>
@@ -101,8 +206,14 @@
 		</Grid>
 		<!--Register list-->
         <Grid Grid.Column="2">
-            <TextBlock Text="Registers" HorizontalAlignment="Center" Margin="0 10 0 0" FontWeight="Black"/>
-            <ListView Margin="10 30 10 10" x:Name="RegistList">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Viewbox>
+                <TextBlock Text="Registers" HorizontalAlignment="Center" Margin="0 5 0 0" FontWeight="Black"/>
+            </Viewbox>
+            <ListView Grid.Row="1" Margin="10 0 10 10" x:Name="RegistList">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Value"/>

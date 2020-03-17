@@ -207,9 +207,9 @@ namespace NRM
 			RegistList.Items.Clear();
 			var select = commandList.ExecutePrev();
 			RegistList.ItemsSource = register;
+			VisualList.SelectedIndex = select == -1 ? 0 : select;
 			if (select < 1)
 				MessageBox.Show("No steps to reverse!");
-			VisualList.SelectedIndex = select == -1 ? 0 : select;
 		}
 
 		private void Reset(object sender, RoutedEventArgs e)
