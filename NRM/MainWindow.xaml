@@ -5,7 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:NRM"
 	mc:Ignorable="d"
-	Title="Natural register machine emulator" MinHeight="550" MinWidth="630" Height="550" Width="630" d:DesignWidth="600" d:DesignHeight="500">
+	Title="Natural register machine emulator" MinHeight="550" MinWidth="630" Height="550" Width="630" d:DesignWidth="600" d:DesignHeight="500" KeyDown="ListKeyDown">
 	<!--Main window markup-->
 	<Grid HorizontalAlignment="Stretch">
 		<!--Column diffinitions-->
@@ -49,23 +49,12 @@
                 <TextBlock Text="Read/Write commands to a file:" Margin="0 0 0 2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Margin="10 0 7.5 0" Content="Read 📄" MinHeight="25" Click="ReadFromFile"/>
                     <Button Grid.Column="1" Content="Write 📝" MinHeight="25" Margin="7.5 0 10 0" Click="WriteToFile"/>
                 </Grid>
-                <!--<Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Margin="10 15 7.5 0" MinHeight="25" Click="ReadFromFile">
-                    <TextBlock Text="Read commands from a file 📄" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Button>
-                <Button Grid.Column="1" Margin="7.5 15 10 0">
-                    <TextBlock Text="Save commands to a file 📝" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Button>-->
-                
             </Grid>
 			
             <Button Grid.Row="4" Content="Set registers ✏"		Margin="10 15 10 0" MinHeight="25" Click="SetRegisters"/>
@@ -101,7 +90,7 @@
 		<!--List of commands-->
 		<Grid Grid.Column="1">
 			<TextBlock Text="Commands" HorizontalAlignment="Center" FontWeight="Black" Margin="0 12 0 0"/>
-			<ListView x:Name="VisualList" Margin="10 30 10 10">
+			<ListView x:Name="VisualList" Margin="10 30 10 10" KeyDown="ListKeyDown">
 				<ListView.View>
 					<GridView>
                         <GridViewColumn Header="#"			x:Name="NumberOfCommand"	Width="50" DisplayMemberBinding="{Binding Number}"/>
@@ -111,16 +100,15 @@
 			</ListView>
 		</Grid>
 		<!--Register list-->
-		<Grid Grid.Column="2">
-			<TextBlock Text="Registers" HorizontalAlignment="Center" Margin="0 10 0 0" FontWeight="Black"/>
-			<ListView Margin="10 30 10 10" x:Name="RegistList">
-				<ListView.View>
-					<GridView>
-						<GridViewColumn Header="Value"/>
-					</GridView>
-				</ListView.View>
-			</ListView>
-		</Grid>
-		
-	</Grid>
+        <Grid Grid.Column="2">
+            <TextBlock Text="Registers" HorizontalAlignment="Center" Margin="0 10 0 0" FontWeight="Black"/>
+            <ListView Margin="10 30 10 10" x:Name="RegistList">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Value"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
 </Window>

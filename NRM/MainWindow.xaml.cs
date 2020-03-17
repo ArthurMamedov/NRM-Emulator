@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.IO;
+using System.Windows.Controls;
 
 namespace NRM
 {
@@ -47,7 +48,7 @@ namespace NRM
 				}
 			}
 		}
-		private void WriteToFile(object sender, RoutedEventArgs e)
+		private void WriteToFile(object sender, RoutedEventArgs e)  //Maybe, it shall be put in a separate fucntion or make it a method of an existing class... Maybe
 		{
 			if (commandList.Count == 0) 
 				return;
@@ -118,19 +119,15 @@ namespace NRM
 
 		private void DeleteCommand(object sender, RoutedEventArgs e)
 		{
-			if (VisualList.SelectedItems.Count <= 0)
-			{
+			if (VisualList.SelectedItems.Count <= 0)			
 				return;
-			}
 			var selectedIndex = VisualList.SelectedIndex;
 			VisualList.ItemsSource = null;
 			VisualList.Items.Clear();
 			commandList.RemoveAt(selectedIndex);
 			VisualList.ItemsSource = commandList;
 			if (VisualList.Items.Count > 0)
-			{
 				VisualList.SelectedIndex = selectedIndex >= VisualList.Items.Count ? selectedIndex - 1 : selectedIndex;
-			}
 
 		}
 
@@ -233,6 +230,13 @@ namespace NRM
 			VisualList.SelectedIndex = 0;
 		}
 
+		private void ListKeyDown(object sender, KeyEventArgs e)
+		{
+			if(e.Key == Key.Delete)
+			{
+				DeleteCommand(this, null);
+			}
+		}
 		private void SetRegisters(object sender, RoutedEventArgs e)
 		{
 			var regDial = new SetRegisterDialog();
