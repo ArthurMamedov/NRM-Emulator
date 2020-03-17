@@ -52,8 +52,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Margin="10 0 7.5 0" Content="Read 📄" MinHeight="25" Click="ReadFromFile"/>
-                    <Button Grid.Column="1" Content="Write 📝" MinHeight="25" Margin="7.5 0 10 0" Click="WriteToFile"/>
+                    <Button Margin="10 0 7.5 0" Content="Load 📄" MinHeight="25" Click="ReadFromFile"/>
+                    <Button Grid.Column="1" Content="Save 📝" MinHeight="25" Margin="7.5 0 10 0" Click="WriteToFile"/>
                 </Grid>
             </Grid>
 			

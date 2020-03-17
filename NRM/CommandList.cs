@@ -36,7 +36,7 @@ namespace NRM
 
         public void Insert(int index, string rawCommand) //inserts command at index and changes numbers of other commands
         {
-            var newCommand = FileParser.ParseCommand(index, rawCommand);
+            var newCommand = FileManager.ParseCommand(index, rawCommand);
             _commands.Insert(index, newCommand);
             for (var i = index + 1; i < _commands.Count; ++i)
                 ++_commands[i].Number;
@@ -107,6 +107,14 @@ namespace NRM
         {
             _current = 0;
             _commands.Clear();
+        }
+
+        public string[] Contents()
+        {
+            string[] result = new string[_commands.Count];
+            for (var i = 0; i < _commands.Count; ++i)
+                result[i] = _commands[i].ToString();
+            return result;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace NRM
 {
-    static class FileParser
+    static class FileManager //renamed to better represent purpose
     {
         public static CommandList ParseFile(string filePath)
         {
@@ -50,6 +50,19 @@ namespace NRM
                     return new Z(number + 1, int.Parse(command[1]));
                 default:
                     throw new Exception($"Syntax Error: Failed to read command.");
+            }
+        }
+
+        public static void /*? different return type*/ WriteCommands(string filePath)
+        {
+            var commandList = CommandList.Instance;
+            try
+            {
+                File.WriteAllLines(filePath, commandList.Contents());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Exception thrown while writing file: {ex.Message}");
             }
         }
     }

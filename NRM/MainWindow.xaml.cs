@@ -35,7 +35,7 @@ namespace NRM
 				try
 				{
 					VisualList.ItemsSource = null;
-					commandList = FileParser.ParseFile(fileDialog.FileName);
+					commandList = FileManager.ParseFile(fileDialog.FileName);
 					OutFileName.Text = $"Current file: {fileDialog.FileName}";
 					OutFileName.Foreground = new SolidColorBrush(new Color() { A = 255, G = 230 });
 					OutFileName.FontWeight = FontWeights.Normal;
@@ -48,28 +48,21 @@ namespace NRM
 				}
 			}
 		}
-		private void WriteToFile(object sender, RoutedEventArgs e)  //Maybe, it shall be put in a separate fucntion or make it a method of an existing class... Maybe
+		private void WriteToFile(object sender, RoutedEventArgs e)  //Maybe, it shall be put in a separate fucntion or make it a method of an existing class... Maybe // done!
 		{
-			if (commandList.Count == 0) 
+			if (commandList == null || commandList?.Count == 0) 
 				return;
-			OpenFileDialog fileDialog = new OpenFileDialog
+			var fileDialog = new SaveFileDialog //как оно вообще должно было сохранять?
 			{
-				Multiselect = false,
-				Filter = "txt files (*.txt)|*.txt",
+                Filter = "txt files (*.txt)|*.txt",
 				DefaultExt = ".txt"
 			};
 			var dialogOk = fileDialog.ShowDialog();
-			if (dialogOk == false) 
+			if (!dialogOk.GetValueOrDefault()) 
 				return;
 			try
 			{
-				using (StreamWriter streamWriter = new StreamWriter(fileDialog.FileName))
-				{
-					foreach(var command in commandList)
-					{
-						streamWriter.WriteLine(command);
-					}
-				}
+				FileManager.WriteCommands(fileDialog.FileName);
 			}
 			catch
 			{
@@ -145,7 +138,7 @@ namespace NRM
 				{
 					commandList = CommandList.Instance;
 				}
-				var command = FileParser.ParseCommand(commandList.Count, EnterCommandBox.Text);
+				var command = FileManager.ParseCommand(commandList.Count, EnterCommandBox.Text);
 				VisualList.ItemsSource = null;
 				VisualList.Items.Clear();
 				commandList.Add(command);
