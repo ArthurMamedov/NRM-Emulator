@@ -98,7 +98,7 @@ namespace NRM
                 RevCommand.Execute();
             else
                 return 0;
-            return (_current = RevCommand.Index);
+            return (_current = RevCommand.Index) - 1;
         }
 
         public IEnumerator GetEnumerator() => _commands.GetEnumerator();

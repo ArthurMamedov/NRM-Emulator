@@ -191,7 +191,7 @@ namespace NRM
 		{
 			if (commandList is null || commandList.Count == 0)
 				return;
-			if (commandList.Current < 0)
+			if (commandList.Current < 1)
 				register.Reset();
 			RegistList.ItemsSource = null;
 			RegistList.Items.Clear();
