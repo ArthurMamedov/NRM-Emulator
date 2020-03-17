@@ -79,14 +79,23 @@ namespace NRM
         public int ExecuteNext()
         {
             if (_current < 1)
+            {
                 _current = 1;
+                _reverse.Clear();
+            }
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
                 throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop.");
             }
+
             if (_current > Count)
-                return Count;
+            {
+                _current = 1;
+                _steps = 0;
+                _reverse.Clear();
+                return 0;
+            }
             _current = _commands[_current - 1].Execute();
             ++_steps;
             return _current - 1;
@@ -97,7 +106,7 @@ namespace NRM
             if (_reverse.TryPop(out var RevCommand))
                 RevCommand.Execute();
             else
-                return 0;
+                return -1;
             return (_current = RevCommand.Index) - 1;
         }
 
