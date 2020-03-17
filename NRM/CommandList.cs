@@ -88,8 +88,14 @@ namespace NRM
                 _current = 0; _steps = 0;
                 throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop.");
             }
+
             if (_current > Count)
-                return Count;
+            {
+                _current = 1;
+                _steps = 0;
+                _reverse.Clear();
+                return 0;
+            }
             _current = _commands[_current - 1].Execute();
             ++_steps;
             return _current - 1;
