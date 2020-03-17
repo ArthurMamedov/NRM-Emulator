@@ -79,7 +79,10 @@ namespace NRM
         public int ExecuteNext()
         {
             if (_current < 1)
+            {
                 _current = 1;
+                _reverse.Clear();
+            }
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
