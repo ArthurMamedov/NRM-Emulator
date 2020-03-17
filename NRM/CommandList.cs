@@ -97,7 +97,7 @@ namespace NRM
             if (_reverse.TryPop(out var RevCommand))
                 RevCommand.Execute();
             else
-                return 0;
+                return -1;
             return (_current = RevCommand.Index) - 1;
         }
 
