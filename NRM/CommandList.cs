@@ -7,7 +7,7 @@ namespace NRM
     internal class CommandList : IEnumerable
     {
         private static CommandList _instance;
-        private const int MaxSteps = 1000;
+        public const int MaxSteps = 1000;
         private readonly List<Command> _commands;
         public readonly Stack<ReverseCommand> _reverse;
         private int _current;
