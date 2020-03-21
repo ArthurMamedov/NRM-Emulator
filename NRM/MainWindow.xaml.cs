@@ -223,11 +223,46 @@ namespace NRM
 			VisualList.SelectedIndex = 0;
 		}
 
-		private void ListKeyDown(object sender, KeyEventArgs e)
+		private void MainWindowKeyDownEventHandler(object sender, KeyEventArgs e)
 		{
 			if(e.Key == Key.Delete)
 			{
 				DeleteCommand(this, null);
+			}
+			else if(e.Key == Key.F1)
+			{
+				MessageBox.Show("Добро пожаловать в эмулятор машины натуральных регистров v1.0!\n" +
+								"\n"+
+								"Авторы:\n"+
+								"GUI:	ArthurMamedov\n"+
+								"Logic: AlexValder, Chupakabra0\n"+
+								"Tester: Chupakabra0\n" +
+								"\n"+
+								"Проект Visual Studio находится на GitHub по адресу: https://github.com/ArthurMamedov/NRM-Emulator \n"+
+								"\n"+
+								"Отсчет номера команд начинается с 1, а нумерация регистров - с 0.\n" +
+								"\n" +
+								"Программу можно загружать из файла, редактировать через графический интерфейс и сохранять\n" +
+								"на диск.Можно выполнять пошагово(Execute Next), отменять действия(Prev Step) и просто\n" +
+								"выполнять программу(Execute).Программа рассчитана на выполнение 1000 шагов, в случае же,\n" +
+								"если мы переходим через эту границу, машина останавливает свою работу.\n" +
+								"\n" +
+								"Программы для данного эмулятора МНР сохраняются в обычном текстовом файле формата *.txt\n" +
+								"\n" +
+								"С помощью команды Set Registers мы задаем изначальные натуральные значения регистров,\n" +
+								"и считается, что результат вычислений находится в 0 - м регистре после выполнения программы.\n" +
+								"\n" +
+								"Программа принимает такие команды:\n" +
+								"\n" +
+								"J(arg1, arg2, arg3)    сравнение значений в регистрах с номерами arg1 и arg2;\n" +
+								"				если равны -то выполняется переход на команду номер arg3;\n" +
+								"				если нет -то переход на следующую\n" +
+								"\n" +
+								"T(arg1, arg2)      копирование из регистра номер arg1 в arg2\n" +
+								"\n" +
+								"Z(arg)         обнуление значения в регистре номер arg\n" +
+								"\n" +
+								"S(arg)         увеличение значения в регистре номер arg\n", "Help");
 			}
 		}
 		private void SetRegisters(object sender, RoutedEventArgs e)
