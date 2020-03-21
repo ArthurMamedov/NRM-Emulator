@@ -39,7 +39,7 @@
                     <Button.ContentTemplate>
                         <DataTemplate>
                             <Viewbox Margin="4">
-                                <TextBlock >Add command ➕</TextBlock>
+                                <TextBlock >Добавить команду ➕</TextBlock>
                             </Viewbox>
                         </DataTemplate>
                     </Button.ContentTemplate>
@@ -51,7 +51,7 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox Margin="4">
-                            <TextBlock>Delete command ❌</TextBlock>
+                            <TextBlock>Удалить команду ❌</TextBlock>
                         </Viewbox>
                     </DataTemplate>
                 </Button.ContentTemplate>
@@ -60,7 +60,7 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox Margin="4">
-                            <TextBlock>Clear 🧹</TextBlock>
+                            <TextBlock>Очистить 🧹</TextBlock>
                         </Viewbox>
                     </DataTemplate>
                 </Button.ContentTemplate>
@@ -72,7 +72,7 @@
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Viewbox>
-                    <TextBlock Text="Read/Write commands to a file:" Margin="0 0 0 2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Загрузить из\сохранить в файл:" Margin="0 0 0 2" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                 </Viewbox>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -83,7 +83,7 @@
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <Viewbox Margin="4">
-                                    <TextBlock>Load 📄</TextBlock>
+                                    <TextBlock>Загрузить 📄</TextBlock>
                                 </Viewbox>
                             </DataTemplate>
                         </Button.ContentTemplate>
@@ -92,7 +92,7 @@
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <Viewbox Margin="4">
-                                    <TextBlock>Save 📝</TextBlock>
+                                    <TextBlock>Сохранить 📝</TextBlock>
                                 </Viewbox>
                             </DataTemplate>
                         </Button.ContentTemplate>
@@ -104,7 +104,7 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox Margin="4">
-                            <TextBlock>Set registers ✏</TextBlock>
+                            <TextBlock>Задать регистры ✏</TextBlock>
                         </Viewbox>
                     </DataTemplate>
                 </Button.ContentTemplate>
@@ -113,7 +113,7 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox Margin="4">
-                            <TextBlock>Execute ✔</TextBlock>
+                            <TextBlock>Выполнить ✔</TextBlock>
                         </Viewbox>
                     </DataTemplate>
                 </Button.ContentTemplate>
@@ -128,7 +128,7 @@
                     <Button.ContentTemplate>
                         <DataTemplate>
                             <Viewbox Margin="4">
-                                <TextBlock>Prev step ◀</TextBlock>
+                                <TextBlock>Шаг назад ◀</TextBlock>
                             </Viewbox>
                         </DataTemplate>
                     </Button.ContentTemplate>
@@ -137,7 +137,7 @@
                     <Button.ContentTemplate>
                         <DataTemplate>
                             <Viewbox Margin="4">
-                                <TextBlock>Next step ▶</TextBlock>
+                                <TextBlock>Шаг вперед ▶</TextBlock>
                             </Viewbox>
                         </DataTemplate>
                     </Button.ContentTemplate>
@@ -148,7 +148,7 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox Margin="3">
-                            <TextBlock>Reset ↺</TextBlock>
+                            <TextBlock>Сброс ↺</TextBlock>
                         </Viewbox>
                     </DataTemplate>
                 </Button.ContentTemplate>
@@ -160,7 +160,7 @@
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
                 <Viewbox>
-                    <TextBlock Text="Move commands: " VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Black" FontSize="12"/>
+                    <TextBlock Text="Сдвиг команд: " VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Black" FontSize="12"/>
                 </Viewbox>
                 <Button Grid.Column="1" MinWidth="25" MinHeight="25" Margin="0 0 7 0" Click="SwapUp">
                     <Button.ContentTemplate>
@@ -183,7 +183,7 @@
 			</Grid>
             <Border BorderThickness="1" Margin="10 15 10 10" BorderBrush="Black" Grid.Row="9">
                 <ScrollViewer>
-                    <TextBlock Grid.Row="9" x:Name="OutFileName" Foreground="Red" FontWeight="Bold" Text="No file selected" Margin="2 2 2 2" TextWrapping="Wrap" MinHeight="50" ScrollViewer.CanContentScroll="True"/>
+                    <TextBlock Grid.Row="9" x:Name="OutFileName" Foreground="Red" FontWeight="Bold" Text="Файл не выбран" Margin="2 2 2 2" TextWrapping="Wrap" MinHeight="50" ScrollViewer.CanContentScroll="True"/>
                 </ScrollViewer>
             </Border>
         </Grid>
@@ -194,13 +194,13 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Viewbox>
-                <TextBlock Text="Commands" HorizontalAlignment="Center" FontWeight="Black" Margin="0 5 0 0"/>
+                <TextBlock Text="Команды" HorizontalAlignment="Center" FontWeight="Black" Margin="0 5 0 0"/>
             </Viewbox>
             <ListView Grid.Row="1" x:Name="VisualList" Margin="10 0 10 10" KeyDown="MainWindowKeyDownEventHandler">
                 <ListView.View>
 					<GridView>
                         <GridViewColumn Header="#"			x:Name="NumberOfCommand"	Width="50" DisplayMemberBinding="{Binding Number}"/>
-						<GridViewColumn Header="Command"	x:Name="CommandStr"			Width="150"/>
+						<GridViewColumn Header="Команда"	x:Name="CommandStr"			Width="150"/>
 					</GridView>
 				</ListView.View>
 			</ListView>
@@ -212,12 +212,12 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Viewbox>
-                <TextBlock Text="Registers" HorizontalAlignment="Center" Margin="0 5 0 0" FontWeight="Black"/>
+                <TextBlock Text="Регистры" HorizontalAlignment="Center" Margin="0 5 0 0" FontWeight="Black"/>
             </Viewbox>
             <ListView Grid.Row="1" Margin="10 0 10 10" x:Name="RegistList">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Value"/>
+                        <GridViewColumn Header="Значение" Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>

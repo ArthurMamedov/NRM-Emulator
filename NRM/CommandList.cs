@@ -71,7 +71,7 @@ namespace NRM
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
-                throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop.");
+                throw new Exception($"Слишком много шагов (>{MaxSteps}). Ваша программа, скорее всего, зациклена.");
             }
             _current = 0; _steps = 0;
         }
@@ -86,7 +86,7 @@ namespace NRM
             if (_steps >= MaxSteps)
             {
                 _current = 0; _steps = 0;
-                throw new Exception($"Too many steps (>{MaxSteps}). Your program probably has an infinite loop.");
+                throw new Exception($"Слишком много шагов (>{MaxSteps}). Ваша программа, скорее всего, зациклена.");
             }
 
             if (_current > Count)

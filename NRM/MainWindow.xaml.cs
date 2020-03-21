@@ -34,7 +34,7 @@ namespace NRM
 				{
 					VisualList.ItemsSource = null;
 					commandList = FileManager.ParseFile(fileDialog.FileName);
-					OutFileName.Text = $"Current file: {fileDialog.FileName}";
+					OutFileName.Text = $"Открыт файл: {fileDialog.FileName}";
 					OutFileName.Foreground = new SolidColorBrush(new Color() { A = 255, G = 230 });
 					OutFileName.FontWeight = FontWeights.Normal;
 					VisualList.ItemsSource = commandList;
@@ -62,9 +62,9 @@ namespace NRM
 			{
 				FileManager.WriteCommands(fileDialog.FileName);
 			}
-			catch
+			catch (Exception ex)
 			{
-				MessageBox.Show("Something went wrong");
+				MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -103,7 +103,7 @@ namespace NRM
 			register?.Clear();
 			VisualList.ItemsSource = commandList;
 			RegistList.ItemsSource = register;
-			OutFileName.Text = "No file selected";
+			OutFileName.Text = "Файл не выбран";
 			OutFileName.FontWeight = FontWeights.Black;
 			OutFileName.Foreground = new SolidColorBrush(new Color() { A=255, R=255});
 		}
@@ -190,7 +190,7 @@ namespace NRM
 			RegistList.ItemsSource = register;
 			if (select >= commandList.Count)
 			{
-				MessageBox.Show("Program is finished!");
+				MessageBox.Show("Программа завершена!");
 			}
 			VisualList.SelectedIndex = select == -1 ? 0 : select;
 		}
@@ -206,7 +206,7 @@ namespace NRM
 			var select = commandList.ExecutePrev();
 			RegistList.ItemsSource = register;
 			if (select < 0)
-				MessageBox.Show("No steps to reverse!");
+				MessageBox.Show("Вы достигли начала программы!");
 			VisualList.SelectedIndex = select == -1 ? 0 : select;
 		}
 

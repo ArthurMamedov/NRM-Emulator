@@ -9,7 +9,7 @@ namespace NRM
         public static CommandList ParseFile(string filePath)
         {
             if (!File.Exists(filePath)) //TODO: delete later?
-                throw new Exception($"File \"{filePath}\" not found");
+                throw new Exception($"Файл \"{filePath}\" не найден");
 
             var input = File.ReadAllLines(filePath);
             var commandList = CommandList.Instance;
@@ -23,7 +23,7 @@ namespace NRM
             }
             catch
             {
-                throw new Exception($"Syntax Error on line {i + 1}. Failed to read file.");
+                throw new Exception($"Синтаксическая ошибка на строке {i + 1}. Ошибка чтения файла.");
             }
             return commandList;
         }
@@ -49,7 +49,7 @@ namespace NRM
                 case "z":
                     return new Z(number + 1, int.Parse(command[1]));
                 default:
-                    throw new Exception($"Syntax Error: Failed to read command.");
+                    throw new Exception($"Синтаксическая ошибка: не удалось прочесть команду.");
             }
         }
 
@@ -62,7 +62,7 @@ namespace NRM
             }
             catch (Exception ex)
             {
-                throw new Exception($"Exception thrown while writing file: {ex.Message}");
+                throw new Exception($"Исключение во время записи файла: {ex.Message}");
             }
         }
     }
